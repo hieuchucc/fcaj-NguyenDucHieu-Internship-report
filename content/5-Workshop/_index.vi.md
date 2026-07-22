@@ -1,31 +1,27 @@
 ---
 title: "Workshop"
 date: 2024-01-01
-weight: 5
+weight: 4
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
 
-
-
-# Đảm bảo truy cập Hybrid an toàn đến S3 bằng cách sử dụng VPC endpoint
+# Kiến trúc hệ thống và giải pháp triển khai LMS & AI Proctoring trên AWS
 
 #### Tổng quan
+- AWS cung cấp một hệ sinh thái toàn diện với kiến trúc hướng sự kiện (Event-driven Architecture) và Serverless, cho phép xây dựng hệ thống quản lý học tập kết hợp giám thị thi cử tự động bằng trí tuệ nhân tạo một cách linh hoạt, bảo mật và tối ưu chi phí.
 
-**AWS PrivateLink** cung cấp kết nối riêng tư đến các dịch vụ aws từ VPCs hoặc trung tâm dữ liệu (on-premise) mà không làm lộ lưu lượng truy cập ra ngoài public internet.
+- Trong báo cáo này, chúng ta sẽ đi sâu vào cấu trúc công nghệ, các dịch vụ AWS cốt lõi và phương án triển khai để vận hành hệ thống LMS & AI Proctoring System.
 
-Trong bài lab này, chúng ta sẽ học cách tạo, cấu hình, và kiểm tra VPC endpoints để cho phép workload của bạn tiếp cận các dịch vụ AWS mà không cần đi qua Internet công cộng.
+- Hệ thống ứng dụng kết hợp nhiều dịch vụ chuyên biệt của AWS để xử lý đồng thời nghiệp vụ LMS, thu thập luồng video thời gian thực và vận hành pipeline AI.
 
-Chúng ta sẽ tạo hai loại endpoints để truy cập đến Amazon S3: gateway vpc endpoint và interface vpc endpoint. Hai loại vpc endpoints này mang đến nhiều lợi ích tùy thuộc vào việc bạn truy cập đến S3 từ môi trường cloud hay từ trung tâm dữ liệu (on-premise).
-+ **Gateway** - Tạo gateway endpoint để gửi lưu lượng đến Amazon S3 hoặc DynamoDB using private IP addresses. Bạn điều hướng lưu lượng từ VPC của bạn đến gateway endpoint bằng các bảng định tuyến (route tables)
-+ **Interface** - Tạo interface endpoint để gửi lưu lượng đến các dịch vụ điểm cuối (endpoints) sử dụng Network Load Balancer để phân phối lưu lượng. Lưu lượng dành cho dịch vụ điểm cuối được resolved bằng DNS.
++ *Frontend & Routing* - Triển khai giao diện web tương tác bằng ReactJS kết hợp AWS Amplify và bảo vệ lưu lượng truy cập thông qua Amazon Route 53 cùng AWS WAF.
+
++ *Core Services & AI* - Sử dụng AWS Lambda xử lý logic nghiệp vụ, Amazon Kinesis Video Streams thu nhận hình ảnh/âm thanh, kết hợp cùng Amazon Rekognition, Amazon Transcribe và Amazon Bedrock để giám sát gian lận và chấm bài tự động.
 
 #### Nội dung
 
 1. [Tổng quan về workshop](5.1-Workshop-overview/)
 2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Truy cập đến S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập đến S3 từ TTDL On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (làm thêm)](5.5-Policy/)
-6. [Dọn dẹp tài nguyên](5.6-Cleanup/)
+3. [Demo](5.3-Demo/)
